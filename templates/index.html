@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="signup-section">
+        <h2>Admin Sign Up</h2>
+        <input type="text" id="signup-phone" placeholder="Phone">
+        <input type="password" id="signup-password" placeholder="Password">
+        <button id="signup-btn">Sign Up</button>
+        <button id="show-login-btn">Already have an account? Log In</button>
+    </div>
+    <div id="login-section" style="display:none;">
+        <h2>Admin Log In</h2>
+        <input type="text" id="login-phone" placeholder="Phone">
+        <input type="password" id="login-password" placeholder="Password">
+        <button id="login-btn">Log In</button>
+        <button id="show-signup-btn">Don't have an account? Sign Up</button>
+    </div>
+    <div id="admin-section" style="display:none;">
+        <h2>Admin Panel</h2>
+        
+        <div>
+            <h3>Add Subject</h3>
+            <input type="text" id="subject-name" placeholder="Subject Name">
+            <button id="add-subject-btn">Add Subject</button>
+            <ul id="subjects-list"></ul>
+        </div>
+
+        <div>
+            <h3>Add Category</h3>
+            <input type="text" id="category-name" placeholder="Category Name">
+            <button id="add-category-btn">Add Category</button>
+        </div>
+
+        <div>
+            <h3>Add Question</h3>
+            <input type="text" id="question-text" placeholder="Question Text">
+            <input type="text" id="answer-choices" placeholder="Answer Choices (comma separated)">
+            <input type="text" id="correct-answer" placeholder="Correct Answer">
+            <input type="number" id="difficulty" placeholder="Difficulty (1-5)" min="1" max="5">
+            <input type="checkbox" id="is-online"> Online
+            <button id="add-question-btn">Add Question</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
