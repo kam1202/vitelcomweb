@@ -24,7 +24,7 @@ async function signup() {
     const phone = document.getElementById('signup-phone').value;
     const password = document.getElementById('signup-password').value;
 
-    const response = await fetch('http://localhost:5000/admin/signup', {
+    const response = await fetch('http://localhost:5001/admin/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ async function login() {
     const password = document.getElementById('login-password').value;
     authHeader = 'Basic ' + btoa(`${phone}:${password}`);
 
-    const response = await fetch('http://localhost:5000/admin/login', {
+    const response = await fetch('http://localhost:5001/admin/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ async function login() {
 async function addSubject() {
     const subjectName = document.getElementById('subject-name').value;
 
-    const response = await fetch('http://localhost:5000/admin/subjects', {
+    const response = await fetch('http://localhost:5001/admin/subjects', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ async function addSubject() {
 }
 
 async function loadSubjects() {
-    const response = await fetch('http://localhost:5000/admin/get_subjects', {
+    const response = await fetch('http://localhost:5001/admin/get_subjects', {
         method: 'GET',
         headers: {
             'Authorization': authHeader
@@ -105,7 +105,7 @@ async function loadSubjects() {
 
 async function loadCategories(subjectId) {
     document.getElementById('categories-section').style.display = 'block';
-    const response = await fetch(`http://localhost:5000/admin/subjects/${subjectId}/categories`, {
+    const response = await fetch(`http://localhost:5001/admin/subjects/${subjectId}/categories`, {
         method: 'GET',
         headers: {
             'Authorization': authHeader
@@ -127,7 +127,7 @@ async function loadCategories(subjectId) {
 
 async function addCategory() {
     const categoryName = document.getElementById('category-name').value;
-    await fetch(`http://localhost:5000/admin/subjects/categories`, {
+    await fetch(`http://localhost:5001/admin/subjects/categories`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ async function addCategory() {
 
 async function loadQuestions(categoryId) {
     document.getElementById('questions-section').style.display = 'block';
-    const response = await fetch(`http://localhost:5000/admin/categories/questions`, {
+    const response = await fetch(`http://localhost:5001/admin/categories/questions`, {
         method: 'GET',
         headers: {
             'Authorization': authHeader
@@ -163,7 +163,7 @@ async function addQuestion() {
     const difficulty = document.getElementById('difficulty').value;
     const isOnline = document.getElementById('is-online').checked;
 
-    const response = await fetch(`http://localhost:5000/admin/questions`, {
+    const response = await fetch(`http://localhost:5001/admin/questions`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -186,3 +186,82 @@ async function addQuestion() {
         alert('Failed to add question');
     }
 }
+// Update Subject
+function updateSubject() {
+    const subjectId = document.getElementById('update-subject-id').value;
+    const newSubjectName = document.getElementById('update-subject-name').value;
+
+    fetch('http://127.0.0.1:5001/admin/update_subject', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            subject_id: subjectId,
+            subject_name: newSubjectName
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert(result.message);
+    })
+    .catch(error => {
+        alert('Failed to update subject.');
+        console.error(error);
+    });
+}
+
+// Update Category
+function updateCategory() {
+    const categoryId = document.getElementById('update-category-id').value;
+    const newCategoryName = document.getElementById('update-category-name').value;
+
+    fetch('http://127.0.0.1:5001/admin/update_category', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            category_id: categoryId,
+            category_name: newCategoryName
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert(result.message);
+    })
+    .catch(error => {
+        alert('Failed to update category.');
+        console.error(error);
+    });
+}
+
+// Update Question
+function updateQuestion() {
+    const questionId = document.getElementById('update-question-id').value;
+    const newQuestionText = document.getElementById('update-question-text').value;
+    const newAnswers = document.getElementById('update-question-answers').value.split(',');
+    const newCorrectAnswer = document.getElementById('update-question-correct-answer').value;
+
+    fetch('http://127.0.0.1:5001/admin/update_question', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            question_id: questionId,
+            question: newQuestionText,
+            answers: newAnswers,
+            correct_answer: newCorrectAnswer
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert(result.message);
+    })
+    .catch(error => {
+        alert('Failed to update question.');
+        console.error(error);
+    });
+}
+

@@ -46,6 +46,31 @@
             <input type="checkbox" id="is-online"> Online
             <button id="add-question-btn">Add Question</button>
         </div>
+
+        <div>
+            <h3>Edit Existing Subject</h3>
+            <select id="edit-subject-dropdown"></select>
+            <input type="text" id="edit-subject-name" placeholder="New Subject Name">
+            <button id="edit-subject-btn">Edit Subject</button>
+        </div>
+
+        <div>
+            <h3>Edit Existing Category</h3>
+            <select id="edit-category-dropdown"></select>
+            <input type="text" id="edit-category-name" placeholder="New Category Name">
+            <button id="edit-category-btn">Edit Category</button>
+        </div>
+
+        <div>
+            <h3>Edit Existing Question</h3>
+            <select id="edit-question-dropdown"></select>
+            <input type="text" id="edit-question-text" placeholder="New Question Text">
+            <input type="text" id="edit-answer-choices" placeholder="New Answer Choices (comma separated)">
+            <input type="text" id="edit-correct-answer" placeholder="New Correct Answer">
+            <input type="number" id="edit-difficulty" placeholder="New Difficulty (1-5)" min="1" max="5">
+            <input type="checkbox" id="edit-is-online"> Online
+            <button id="edit-question-btn">Edit Question</button>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
